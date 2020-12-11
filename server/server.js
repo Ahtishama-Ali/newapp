@@ -4,6 +4,8 @@ import logger from 'morgan';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import todoRouter from './http/routes/todoRouter.js';
+import userRouter from './http/routes/userRouter';
+import bodyParser from 'body-parser';
 
 const app = express();
 
@@ -15,6 +17,7 @@ const port = process.env.PORT || 5000
 app.use(cors());
 app.use(logger());
 app.use(express.json());
+app.use(bodyParser.json())
 
 // mongoose
 const db = process.env.MONGO
@@ -27,6 +30,7 @@ mongoose.connect(db, {
 
 // routes
 app.use('/api', todoRouter);
+app.use('/api', userRouter);
 
 
 app.listen(port, () => console.log(`server running on port ${port}`));
