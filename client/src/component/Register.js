@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -18,11 +19,36 @@ export default class Register extends Component {
         })
     }
 
+    submitHandler = e => {
+        e.preventDefault();
+
+        const user = {
+            name : this.state.name,
+            email : this.state.email,
+            password : this.state.password
+        }
+
+        Axios.post('/api/signup', user, {headers: {"content-type": "application/json"}})
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+        this.setState({
+            name: "",
+            email: "",
+            password: ""
+        })
+        
+    }
+ 
     render() {
         return (
             <div id="myform">
                 <br/><br/><br/><br/><br/>
-                <form className="form">
+                <form className="form" onSubmit={this.submitHandler}>
                     <h2>Sign_Up</h2>
                     <div className="mb-3">
                         <label className="form-label">Name</label>
@@ -38,7 +64,7 @@ export default class Register extends Component {
                     </div>
 
                     <button type="submit" className="btn btn-primary">Register</button>
-                    <Link className="nav-link" id="log" to="/login">login</Link>
+                    <Link className="nav-link" id="log" to="/">login</Link>
                 </form>
                 
             </div>

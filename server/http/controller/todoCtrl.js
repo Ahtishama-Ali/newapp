@@ -1,8 +1,8 @@
 import TodoClass from '../../application/services/todoService';
 
 class todoRoutesCtrl {
-    static async getTodo(req, res) {
-
+    static async getTodo(req, res,) {
+        console.log("getTodo userData",req.userData)
         const fetchAll = await TodoClass.fetchAllPost();
         res.json(fetchAll)
     }

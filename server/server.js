@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import todoRouter from './http/routes/todoRouter.js';
 import userRouter from './http/routes/userRouter';
 import bodyParser from 'body-parser';
+// import session from "express-session";
 
 const app = express();
 
@@ -31,6 +32,7 @@ mongoose.connect(db, {
 // routes
 app.use('/api', todoRouter);
 app.use('/api', userRouter);
+
 
 
 app.listen(port, () => console.log(`server running on port ${port}`));

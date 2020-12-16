@@ -20,7 +20,7 @@ export default class EditTodo extends Component {
     // data fetching
     componentDidMount() {
         
-        axios.get('/api/' + this.props.match.params.id)
+        axios.get('/api/' + this.props.match.params.id, {headers: {"content-type": "application/json"}})
             .then(res => {
                 this.setState({
                     title: res.data.title,
@@ -42,10 +42,10 @@ export default class EditTodo extends Component {
             desc: this.state.desc
         }
 
-        axios.put('/api/update/' + this.props.match.params.id, updateTodo)
+        axios.put('/api/update/' + this.props.match.params.id, updateTodo, {headers: {"content-type": "application/json"}})
         .then(res => {
             console.log(res.data)
-            axios.get('/api/' + this.props.match.params.id)
+            axios.get('/api/' + this.props.match.params.id, {headers: {"content-type": "application/json"}})
             .then(res => {
                 this.setState({
                     title: res.data.title,
@@ -60,7 +60,7 @@ export default class EditTodo extends Component {
         .catch(err => {
             console.log(err)
         })
-        this.props.history.push('/')
+        this.props.history.push('/dashboard')
     }
 
     render() {

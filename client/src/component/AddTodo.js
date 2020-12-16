@@ -12,9 +12,9 @@ export default class AddTodo extends Component {
 
     // data fetching
     componentDidMount() {
-        axios.get('/api')
+        axios.get('/api', {headers: {"content-type": "application/json"}})
             .then(res => {
-                console.log(res)
+                console.log("33333333333333333333333333333333",res)
                 if (res.data.length > 0) {
                     this.setState({
                         todos: res.data
@@ -28,7 +28,7 @@ export default class AddTodo extends Component {
 
     // delete item
     deleteHandler = (id) => {
-        axios.delete('/api/delete/' + id)
+        axios.delete('/api/delete/' + id , {headers: {"content-type": "application/json"}})
             .then(res => {
                 console.log(res.data)
                 axios.get('/api')

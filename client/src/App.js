@@ -8,18 +8,24 @@ import Register from './component/Register';
 import EditTodo from './component/EditTodo';
 import CreateTodo from './component/CreateTodo';
 import Login from './component/Login';
-
+import setAuthenticationToken from './setAuthenticationToken'
 
 function App() {
+  if(localStorage.jwt){
+    setAuthenticationToken(localStorage.jwt);
+  }
+  
+
   return (
     <div className="container">
       <Navbar />
       <div id="container">
-        <Route path="/" exact component={AddTodo} />
+        <Route path="/" exact component={Login} />
+        <Route path="/dashboard" exact component={AddTodo} />
         <Route path="/create" exact component={CreateTodo} />
-        <Route path="/edittodo/:id" exact component={EditTodo} />
+        {localStorage.jwt ? <Route path="/edittodo/:id" exact component={EditTodo} />: null}
+        
         <Route path="/register" exact component={Register} />
-        <Route path="/login" exact component={Login} />
       </div>
     </div>
 

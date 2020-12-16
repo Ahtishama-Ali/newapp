@@ -26,10 +26,10 @@ export default class CreateTodo extends Component {
             desc: this.state.desc
         }
 
-        axios.post('/api/add', todo)
+        axios.post('/api/add', todo, {headers: {"content-type": "application/json"}})
             .then(res => {
                 console.log(res.data)
-                axios.get('/api')
+                axios.get('/api', {headers: {"content-type": "application/json"}})
                     .then(res => {
                         this.setState({
                             todos: res.data
@@ -46,7 +46,7 @@ export default class CreateTodo extends Component {
             title: '',
             desc: ''
         })
-        this.props.history.push('/')
+        this.props.history.push('/dashboard')
     }
 
     // data fetching
